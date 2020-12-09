@@ -5,7 +5,7 @@
     using System.Data.SqlClient;
     using System.Text.RegularExpressions;
 
-    public struct RegExFunction
+    public partial class RegExFunction
     {
         /// <summary>
         /// Returns any matches for the pattern.
@@ -13,6 +13,8 @@
         /// <param name="pattern">The RegEx pattern to match.</param>
         /// <param name="expression">The string to search.</param>
         /// <returns>SqlString     The match found.</returns>
+        
+        [Microsoft.SqlServer.Server.SqlFunction]
         public static SqlString Match(string pattern, string expression)
         {
             var result = new Regex(pattern).Match(expression).Value;
@@ -25,6 +27,8 @@
         /// <param name="pattern">The RegEx pattern to match.</param>
         /// <param name="expression">The string to search.</param>
         /// <returns>SqlInt32    The position the match was found at.</returns>
+        
+        [Microsoft.SqlServer.Server.SqlFunction]
         public static SqlInt32 MatchPosition(string pattern, string expression)
         {
             var result = new Regex(pattern).Match(expression);
@@ -37,6 +41,8 @@
         /// <param name="pattern">RegEx pattern to match.</param>
         /// <param name="expression">The string to search.</param>
         /// <returns>SqlInt32    The length of the match.</returns>
+        
+        [Microsoft.SqlServer.Server.SqlFunction]
         public static SqlInt32 MatchLength(string pattern, string expression)
         {
             return new SqlInt32(new Regex(pattern).Match(expression).Length);
@@ -49,6 +55,8 @@
         /// <param name="expression">The string to search.</param>
         /// <param name="replacement">The value to replace the match(es) with.</param>
         /// <returns>SqlString     The modified string.</returns>
+
+        [Microsoft.SqlServer.Server.SqlFunction]
         public static SqlString Replace(string pattern, string expression, string replacement)
         {
             return new SqlString(new Regex(pattern).Replace(expression, replacement));
